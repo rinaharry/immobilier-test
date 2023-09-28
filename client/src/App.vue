@@ -1,83 +1,42 @@
 <script setup lang="ts">
+import { ref, type Ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import Navbar from './components/layouts/Navbar.vue'
+import Produit from './components/Produit.vue'
+import { onMounted } from 'vue'
+
+// const appTitle: Ref<string> = ref('Bakup')
+// const sidebar: Ref<boolean> = ref(false)
+
+// const menuItems = [
+//   { title: 'Home', path: '/landing', icon: 'fas fa-home' },
+//   { title: 'Product', path: '/product', icon: 'fas fa-dice' },
+//   { title: 'Price', path: '/price', icon: 'fas fa-comments-dollar' },
+//   { title: 'Contact', path: '/contact', icon: 'fas fa-headset' }
+// ]
+
+const isModalVisible: Ref<boolean> = ref(false)
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <b-app>
+    <b-navbar class="px-2" toggleable="lg" type="dark" variant="info">
+      <RouterLink to="/"> <b-navbar-brand href="/">Immobilier</b-navbar-brand></RouterLink>
 
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-  <RouterView />
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <!-- <b-nav-item href="#">Link</b-nav-item> -->
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+  </b-app>
+  <div class="container">
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
+/* Ajoutez votre style ici */
 </style>

@@ -1,28 +1,25 @@
-import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
 import connectToDatabase from "./mongoose";
+import express from "express";
+import route from "./route";
+import cors from "cors";
 
-import resolvers from "./resolvers";
+const app = express();
+app.use(cors());
+app.use(express.json()); // to support JSON-encoded bodies
+app.use(
+  express.urlencoded({
+    // to support URL-encoded bodies
+    extended: true,
+  })
+);
 
-import { readFileSync } from "fs";
-
-const typeDefs = readFileSync("./schema.graphql", { encoding: "utf-8" });
-
-// The ApolloServer constructor requires two parameters: your schema
-// definition and your set of resolvers.
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
+app.use("/", route);
+app.use(cors());
 
 const start = async () => {
   await connectToDatabase();
-  const { url } = await startStandaloneServer(server, {
-    context: async () => null,
-    listen: { port: 4000 },
-  });
-
-  console.log(`🚀 Server listening at: ${url}`);
+  app.listen(4000);
+  console.log("app listen to pot 4000");
 };
 
 start();
